@@ -3,10 +3,10 @@ import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Sidebar from "./component/Sidebar";
 import Navbar from "./component/Navbar";
+import Cards from "./component/Cards";
+import Table from "./component/Table";
 
 const drawerWidth = 240;
 
@@ -51,27 +51,33 @@ export default function PersistentDrawerLeft() {
       <Sidebar open={open} />
       <Main
         open={open}
-        sx={{ height: "100%", backgroundColor: "white", color: "black" }}
+        sx={{ height: "100vh", backgroundColor: "#f1f5f9", color: "black" }}
       >
         <DrawerHeader />
-        <div style={{ height: "200px", backgroundColor: "#624bff" }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              padding: "40px 20px",
-            }}
-          >
+        <div>
+          <div className="h-40" style={{ backgroundColor: "#624bff" }}>
             <div
-              style={{ color: "white", fontSize: "24px", fontWeight: "bold" }}
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                padding: "40px 20px 0px 20px",
+              }}
             >
-              Projects
+              <div
+                style={{ color: "white", fontSize: "24px", fontWeight: "bold" }}
+              >
+                Projects
+              </div>
+              <div>
+                <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow rounded-md">
+                  Create New Project
+                </button>
+              </div>
             </div>
-            <div>
-              <button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow rounded-md">
-                Create New Project
-              </button>
+            <div className="pt-2">
+              <Cards />
             </div>
+            <Table />
           </div>
         </div>
       </Main>
