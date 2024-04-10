@@ -2,6 +2,7 @@ import React from "react";
 import Avatar from "@mui/material/Avatar";
 import Chip from "@mui/material/Chip";
 import MoreVertSharpIcon from "@mui/icons-material/MoreVertSharp";
+import Image from 'next/image';
 const Table = () => {
   const data = [
     {
@@ -46,12 +47,12 @@ const Table = () => {
     priority: string;
     progress: string;
     chipColor:
-      | "primary"
-      | "secondary"
-      | "error"
-      | "warning"
-      | "info"
-      | "success";
+    | "primary"
+    | "secondary"
+    | "error"
+    | "warning"
+    | "info"
+    | "success";
   };
 
   // Define the ChipProps type
@@ -109,9 +110,9 @@ const Table = () => {
             </div>
           </div>
         </div>
-        <div className="col-span-1 md:col-span-3 mb-5">
+        <div className="col-span-1 md:col-span-3 mb-5 bg-white shadow-md rounded-md">
           {/* card  */}
-          <div className="bg-white shadow-md rounded-md">
+          <div className="">
             {/* card body  */}
             <div className="px-4 py-3 border-b flex justify-between items-center">
               <h4 className="text-lg font-semibold">Tasks Performance</h4>
@@ -125,47 +126,38 @@ const Table = () => {
                 >
                   <MoreVertSharpIcon />
                 </button>
-                <div
-                  className="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg hidden"
-                  aria-labelledby="dropdownTask"
-                >
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Action
-                  </a>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Another action
-                  </a>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Something else here
-                  </a>
-                </div>
               </div>
             </div>
-            <div className="p-4">
-              {/* icon with content  */}
-              <div className="flex justify-around">
-                <div className="text-center">
-                  <h1 className="text-4xl font-semibold mb-1">76%</h1>
-                  <p className="text-gray-500">Completed</p>
-                </div>
-                <div className="text-center">
-                  <h1 className="text-4xl font-semibold mb-1">32%</h1>
-                  <p className="text-gray-500">In-Progress</p>
-                </div>
-                <div className="text-center">
-                  <h1 className="text-4xl font-semibold mb-1">13%</h1>
-                  <p className="text-gray-500">Behind</p>
-                </div>
-              </div>
+            <div className="mt-3">
+              <Image src="chart.svg" alt="Example SVG" width={500} height={500} />
+            </div>
+            <div className="px-3 pt-5 pb-10">
+            <div className="flex items-center justify-around md:flex-wrap">
+            <div className="text-center flex flex-col items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-check-circle icon-sm text-success">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <h1 className="text-2xl mb-0 ">76%</h1>
+                <p>Completed</p>
+            </div>
+            <div className="text-center flex flex-col items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-trending-up icon-sm text-warning">
+                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                    <polyline points="17 6 23 6 23 12"></polyline>
+                </svg>
+                <h1 className="text-2xl mb-0 ">32%</h1>
+                <p>In-Progress</p>
+            </div>
+            <div className="text-center flex flex-col items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-trending-down icon-sm text-danger">
+                    <polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline>
+                    <polyline points="17 18 23 18 23 12"></polyline>
+                </svg>
+                <h1 className="text-2xl mb-0 ">13%</h1>
+                <p>Behind</p>
+            </div>
+        </div>
             </div>
           </div>
         </div>
