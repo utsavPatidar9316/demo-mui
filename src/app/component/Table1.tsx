@@ -3,14 +3,16 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import Chip from '@mui/material/Chip';
 const TableComponent = ({ data }: any) => {
   return (
-    <TableContainer component={Paper} sx={{ padding: "10px" }}>
-      <div className='flex justify-between items-center p-6'>
-        <h1 className='font-bold'>My Task</h1>
+    <TableContainer component={Paper}>
+      <div className='flex justify-between items-center p-3'>
+        <div className="px-2 ">
+          <h4 className="font-semibold">My Tasks</h4>
+        </div>
         <h1>My Task</h1>
       </div>
       <hr />
-      <div style={{ overflowX: 'scroll' }}>
-        <Table>
+      {/* <div style={{ overflowX: 'scroll' }}> */}
+        <Table sx={{overflowX: 'scroll',}}>
           <TableHead>
             <TableRow sx={{ backgroundColor: "#f1f5f9", padding: '4px', fontWeight: "bold", fontSize: "0.875rem" }}>
 
@@ -41,7 +43,7 @@ const TableComponent = ({ data }: any) => {
             ))}
           </TableBody>
         </Table>
-      </div>
+      {/* </div> */}
     </TableContainer>
   );
 };
