@@ -3,7 +3,7 @@ import React from "react";
 const Cards = () => {
   const data = [
     {
-      title: "Projects",
+      title: "Projectss",
       number: "18",
       completed: "2 Completed",
     },
