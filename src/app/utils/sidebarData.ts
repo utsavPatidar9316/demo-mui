@@ -1,9 +1,1 @@
-export const sidebarData = [
-  "All mail",
-  "Trash",
-  "Spam",
-  "Inbox",
-  "Starred",
-  "Send email",
-  "Drafts",
-];
+export const sidebarData = ["Dashboard"];

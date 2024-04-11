@@ -1,26 +1,30 @@
 import React from "react";
-
+import Image from "next/image";
 const Cards = () => {
   const data = [
     {
-      title: "Projectss",
+      title: "Projects",
       number: "18",
       completed: "2 Completed",
+      src: "projectIcon.svg",
     },
     {
       title: "Active Task",
       number: "132",
       completed: "28 Completed",
+      src: "activeTask.svg",
     },
     {
       title: "Teams",
       number: "12",
       completed: "1 Completed",
+      src: "termsIcon.svg",
     },
     {
       title: "Productivity",
       number: "76%",
       completed: "5% Completed",
+      src: "productivityIcon.svg",
     },
   ];
 
@@ -37,27 +41,20 @@ const Cards = () => {
                 <div>
                   <h4 className="mb-0 text-xl font-semibold">{x.title}</h4>
                 </div>
-                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary-100 text-primary-600">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M16 7a2 2 0 00-2-2H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7zM6 5a4 4 0 00-4 4v10a4 4 0 004 4h8a4 4 0 004-4V9a2 2 0 00-2-2H6z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
+                <div
+                  className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary-100 text-primary-600 p-2"
+                  style={{
+                    backgroundColor: "rgba(98,75,255,.3)",
+                    color: "rgba(98,75,255,1)",
+                  }}
+                >
+                  <Image src={x.src} alt={x.title} width={150} height={150} />
                 </div>
               </div>
               <div className="leading-tight">
                 <h1 className="text-3xl font-bold mb-2">{x.number}</h1>
-                <p className="text-gray-600">
-                  <span className="text-dark me-2 font-semibold">
-                    {x.completed}
-                  </span>
+                <p className="text-gray-600 text-sm">
+                  <span>{x.completed}</span>
                 </p>
               </div>
             </div>
