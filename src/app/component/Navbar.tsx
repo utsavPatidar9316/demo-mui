@@ -99,13 +99,38 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
+
+
 const Navbar = ({ open, handleDrawerOpen }: props) => {
+
+  const [darkMode, setDarkMode] = React.useState(() => {
+    const savedMode = localStorage.getItem('darkMode');
+    return savedMode ? JSON.parse(savedMode) : false;
+  });
+
+  // Update localStorage and body styles whenever darkMode changes
+  React.useEffect(() => {
+    localStorage.setItem('darkMode', JSON.stringify(darkMode));
+    if (darkMode) {
+      document.body.style.backgroundColor = '#1e293b';
+      document.body.style.color = '#ffffff';
+    } else {
+      document.body.style.backgroundColor = '#ffffff';
+      document.body.style.color = '#1e293b';
+    }
+  }, [darkMode]);
+
+  // Toggle darkMode state
+  const handleDarkModeToggle = () => {
+    setDarkMode(!darkMode);
+  };
+
+
   return (
     <AppBar
       position="fixed"
       open={open}
-      sx={{ backgroundColor: "#ffffff", color: "#94a3b8" }}
-    >
+      sx={{ backgroundColor: darkMode ? "#1e293b" : "#ffffff", color: darkMode ? "#ffffff" : "#1e293b" }}    >
       <Toolbar
         sx={{
           display: "flex",
@@ -143,7 +168,7 @@ const Navbar = ({ open, handleDrawerOpen }: props) => {
             padding: "14px",
           }}
         >
-          <LightModeIcon />
+          <LightModeIcon  onClick={handleDarkModeToggle}/>
           <NotificationsNoneIcon />
           <StyledBadge
             overlap="circular"
