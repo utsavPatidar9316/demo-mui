@@ -13,6 +13,9 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import Badge from "@mui/material/Badge";
 import Avatar from "@mui/material/Avatar";
+import { useDarkMode } from "../context/Darkmode";
+import { theme } from "../utils/theme";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 const drawerWidth = 240;
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
@@ -99,38 +102,17 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-
-
 const Navbar = ({ open, handleDrawerOpen }: props) => {
-
-  const [darkMode, setDarkMode] = React.useState(() => {
-    const savedMode = localStorage.getItem('darkMode');
-    return savedMode ? JSON.parse(savedMode) : false;
-  });
-
-  // Update localStorage and body styles whenever darkMode changes
-  React.useEffect(() => {
-    localStorage.setItem('darkMode', JSON.stringify(darkMode));
-    if (darkMode) {
-      document.body.style.backgroundColor = '#1e293b';
-      document.body.style.color = '#ffffff';
-    } else {
-      document.body.style.backgroundColor = '#ffffff';
-      document.body.style.color = '#1e293b';
-    }
-  }, [darkMode]);
-
-  // Toggle darkMode state
-  const handleDarkModeToggle = () => {
-    setDarkMode(!darkMode);
-  };
-
-
+  const { darkMode, toggleDarkMode } = useDarkMode();
   return (
     <AppBar
       position="fixed"
       open={open}
-      sx={{ backgroundColor: darkMode ? "#1e293b" : "#ffffff", color: darkMode ? "#ffffff" : "#1e293b" }}    >
+      sx={{
+        backgroundColor: darkMode ? theme.darkmodeBg : theme.lightmodeBg,
+        color: darkMode ? theme.darkmodeClr : theme.lightmodeClr,
+      }}
+    >
       <Toolbar
         sx={{
           display: "flex",
@@ -159,16 +141,20 @@ const Navbar = ({ open, handleDrawerOpen }: props) => {
             />
           </Search>
         </div>
-
         <div
           style={{
             display: "flex",
             alignItems: "center",
             gap: "22px",
             padding: "14px",
+            cursor: "pointer",
           }}
         >
-          <LightModeIcon  onClick={handleDarkModeToggle}/>
+          {darkMode ? (
+            <DarkModeIcon onClick={toggleDarkMode} />
+          ) : (
+            <LightModeIcon onClick={toggleDarkMode} />
+          )}
           <NotificationsNoneIcon />
           <StyledBadge
             overlap="circular"
