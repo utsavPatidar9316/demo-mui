@@ -8,6 +8,8 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import DashboardCustomizeRoundedIcon from "@mui/icons-material/DashboardCustomizeRounded";
 import { sidebarData } from "../utils/sidebarData";
+import { useDarkMode } from "../context/Darkmode";
+import { theme } from "../utils/theme";
 
 const drawerWidth = 240;
 
@@ -16,6 +18,7 @@ type props = {
 };
 
 const Sidebar = ({ open }: props) => {
+  const { darkMode } = useDarkMode();
   return (
     <Drawer
       sx={{
@@ -24,6 +27,8 @@ const Sidebar = ({ open }: props) => {
         "& .MuiDrawer-paper": {
           width: drawerWidth,
           boxSizing: "border-box",
+          color: darkMode ? theme.darkmodeClr : theme.lightmodeClr,
+          bgcolor: darkMode ? theme.darkmodeBg : theme.lightmodeBg,
         },
       }}
       variant="persistent"
@@ -35,6 +40,7 @@ const Sidebar = ({ open }: props) => {
           padding: "1rem 1.5rem 1.5rem",
           display: "block",
           marginRight: 0,
+          filter: darkMode ? "brightness(0) invert(1)" : "",
         }}
       >
         <img
@@ -47,7 +53,12 @@ const Sidebar = ({ open }: props) => {
         {sidebarData.map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
-              <ListItemIcon sx={{ minWidth: "30px" }}>
+              <ListItemIcon
+                sx={{
+                  minWidth: "30px",
+                  filter: darkMode ? "brightness(0) invert(1)" : "",
+                }}
+              >
                 <DashboardCustomizeRoundedIcon />
               </ListItemIcon>
               <ListItemText primary={text} />
