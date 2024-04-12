@@ -41,7 +41,8 @@ const TableActivity = ({ data }: any) => {
                                         <td>
                                             <div className="flex items-center mx-5">
                                                 <div>
-                                                    <Avatar src={x.img} style={{ marginRight: '5px' }} />
+
+                                                    <Avatar src={`https://i.pravatar.cc/300?img=${x.img}`} style={{ marginRight: '5px' }} />
                                                 </div>
                                                 <div className="ms-2 ">
                                                     <h5 >{x.name}</h5>
