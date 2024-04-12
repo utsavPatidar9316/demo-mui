@@ -1,8 +1,5 @@
-"use client";
 import * as React from "react";
 import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import CssBaseline from "@mui/material/CssBaseline";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -16,6 +13,8 @@ import Avatar from "@mui/material/Avatar";
 import { useDarkMode } from "../context/Darkmode";
 import { theme } from "../utils/theme";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import Popover from "@mui/material/Popover";
+import Image from "next/image";
 const drawerWidth = 260;
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
@@ -27,7 +26,7 @@ type props = {
   handleDrawerOpen: () => void;
 };
 
-const AppBar = styled(MuiAppBar, {
+const CustomAppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })<AppBarProps>(({ theme, open }) => ({
   transition: theme.transitions.create(["margin", "width"], {
@@ -106,8 +105,20 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 const Navbar = ({ open, handleDrawerOpen, isSmallScreen }: props) => {
   const { darkMode, toggleDarkMode } = useDarkMode();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event: any) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const openPop = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
   return (
-    <AppBar
+    <CustomAppBar
       position="fixed"
       open={open}
       sx={{
@@ -164,11 +175,88 @@ const Navbar = ({ open, handleDrawerOpen, isSmallScreen }: props) => {
             anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
             variant="dot"
           >
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+            <span onClick={handleClick}>
+              <Avatar alt="Remy Sharp" src="chart.svg" />
+            </span>
+            <Popover
+              id={id}
+              open={openPop}
+              anchorEl={anchorEl}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "center",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "center",
+              }}
+            >
+              <div
+                className="dropdown-menu dropdown-menu-end show"
+                style={{
+                  backgroundColor: darkMode
+                    ? theme.darkmodeBg
+                    : theme.lightmodeBg,
+                  color: darkMode ? theme.darkmodeClr : theme.lightmodeClr,
+                }}
+              >
+                <div className="rounded p-4">
+                  <div className="font-semibold">John E. Grainger</div>
+                  <div className="text-xs pb-2 hover:text-blue-200 cursor-pointer">
+                    View my profile
+                  </div>
+                  <hr className="pt-2" />
+                  <ul
+                    className="text-sm font-mono cursor-pointer"
+                    style={{
+                      filter: darkMode ? "brightness(0) invert(1)" : "",
+                    }}
+                  >
+                    <li className="flex gap-3">
+                      <Image
+                        src="profile.svg"
+                        alt="profile"
+                        width={12}
+                        height={12}
+                      />{" "}
+                      Edit Profile
+                    </li>
+                    <li className="flex gap-3">
+                      <Image
+                        src="activity.svg"
+                        alt="activity"
+                        width={12}
+                        height={12}
+                      />{" "}
+                      Activity log
+                    </li>
+                    <li className="flex gap-3">
+                      <Image
+                        src="setting.svg"
+                        alt="setting"
+                        width={12}
+                        height={12}
+                      />{" "}
+                      Settings
+                    </li>
+                    <li className="flex gap-3">
+                      <Image
+                        src="signout.svg"
+                        alt="signout"
+                        width={12}
+                        height={12}
+                      />{" "}
+                      Sign Out
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </Popover>
           </StyledBadge>
         </div>
       </Toolbar>
-    </AppBar>
+    </CustomAppBar>
   );
 };
 
