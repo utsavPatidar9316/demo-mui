@@ -137,8 +137,12 @@ export default function PersistentDrawerLeft() {
               <Cards />
             </div>
             <Table />
-            <Table1 />
-            <Table2 />
+            <div className="px-4 pb-4">
+            <div className="grid grid-cols-1 md:grid-cols-10 gap-5">
+              <Table1 />
+              <Table2 />
+              </div>
+            </div>
           </div>
         </div>
       </Main>
