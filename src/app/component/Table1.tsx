@@ -7,49 +7,75 @@ const TableComponent = () => {
   const { darkMode } = useDarkMode();
 
   return (
-    <TableContainer component={Paper} sx={{
-      backgroundColor: darkMode ? theme.darkmodeBg : theme.lightmodeBg,
-      color: darkMode ? theme.darkmodeClr : theme.lightmodeClr,
-      "& .MuiTableCell-root": {
-        color: darkMode ? theme.cardDarkmodeColor : theme.lightmodeClr,
-        bgcolor: darkMode ? theme.darkmodeBg : theme.lightmodeBg,
-      },
-    }}>
-      <div className='flex justify-between items-center p-3'>
-        <div className="px-2 ">
-          <h4 className="font-semibold ">My Tasks</h4>
+
+
+
+    <div className="p-4">
+      <div className="grid grid-cols-1 md:grid-cols-10 gap-5">
+        <div className="col-span-1 md:col-span-5 mb-5">
+          {/* card  */}
+          <div
+            className="shadow-md rounded-md"
+            style={{
+              backgroundColor: darkMode ? theme.darkmodeBg : theme.lightmodeBg,
+              color: darkMode ? theme.cardDarkmodeColor : theme.lightmodeClr,
+            }}
+          >
+
+            {/* card header  */}
+            <div className="px-4 py-3 border-b border-gray-300">
+              <h4 className="font-semibold">Teams</h4>
+            </div>
+
+
+            <div className="overflow-x-auto">
+              <table className="w-full table-auto text-left">
+                <thead className="bg-gray-200">
+                  <tr>
+                    <th className="px-4 py-2 border-b  border-gray-300">Name</th>
+                    <th className="px-4 py-2 border-b  border-gray-300">Role</th>
+                    <th className="px-4 py-2 border-b  border-gray-300">Activity</th>
+                    <th className="px-4 py-2 border-b  border-gray-300"></th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
+                  {table1.map((x: any, key: any) => {
+                    let priorityClass = "";
+                    switch (x.Status) {
+                      case "Approved":
+                        priorityClass = "priority-track";
+                        break;
+                      case "Pending":
+                        priorityClass = "priority-high";
+
+                      default:
+                        break;
+                    }
+                    return (
+                      <tr key={key} >
+
+
+                        <td className="px-4 py-3 flex align-middle gap-2"> <input type="checkbox" className="form-checkbox h-5 w-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" />{x.name}</td>
+                        <td className="px-4 py-3">{x.Deadline}</td>
+                        <td className="px-4 py-3">
+                          <span className={`priority-text ${priorityClass}`}>
+                            {x.Status}
+                          </span>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+
+          </div>
         </div>
-        <h1>My Task</h1>
+
       </div>
-      <hr />
-      <Table sx={{ overflowX: 'scroll', }}>
-        <TableHead>
-          <TableRow sx={{ backgroundColor: "#f1f5f9", padding: '4px', fontWeight: "bold", fontSize: "0.875rem" }}>
-            <TableCell>Name</TableCell>
-            <TableCell>Deadline</TableCell>
-            <TableCell>Status</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {table1?.map((row: any, key: any) => (
-            <TableRow key={key}>
-              <TableCell sx={{ padding: '4px', minWidth: "200px" }}> <Checkbox />{row.name}</TableCell>
-              <TableCell sx={{ padding: '4px', minWidth: "200px" }}>{row.Deadline}</TableCell>
-              <TableCell sx={{ padding: '4px', minWidth: "200px" }}> {row.Status === "Approved" ? (
-                <span className="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full  dark:text-green-800">
-                  {row.Status}
-                </span>
-              ) : (
-                <span className="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full  dark:text-yellow-800">
-                  {row.Status}
-                </span>
-              )}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    </div>
   );
 };
+
 
 export default TableComponent;

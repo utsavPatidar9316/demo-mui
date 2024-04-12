@@ -3,48 +3,119 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import { useDarkMode } from '../context/Darkmode';
 import { theme } from "../utils/theme";
 import { table2 } from '../utils/data';
+import MoreVertSharpIcon from "@mui/icons-material/MoreVertSharp";
 const TableActivity = ({ data }: any) => {
     const { darkMode } = useDarkMode();
     return (
-        <div>
-            <TableContainer sx={{
-                backgroundColor: darkMode ? theme.darkmodeBg : theme.lightmodeBg,
-                color: darkMode ? theme.darkmodeClr : theme.lightmodeClr,
-                "& .MuiTableCell-root": {
-                    color: darkMode ? theme.cardDarkmodeColor : theme.lightmodeClr,
-                    bgcolor: darkMode ? theme.darkmodeBg : theme.lightmodeBg,
-                },
-            }}>
-                <div className="px-2 m-3">
-                    <h4 className="font-semibold">Teams</h4>
-                </div>
-                <hr />
-                <Table>
-                    <TableHead>
-                        <TableRow sx={{ backgroundColor: "#f1f5f9", padding: '4px', fontSize: "0.875rem" }}>
-                            <TableCell>Name</TableCell>
-                            <TableCell>Role</TableCell>
-                            <TableCell>Last Activity</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {table2.map((row: any, key: any) => (
-                            <TableRow key={key}>
-                                <TableCell sx={{ padding: '4px', minWidth: "200px", display: 'flex', alignItems: 'center' }}>
-                                    <Avatar src={row.img} style={{ marginRight: '10px' }} />
-                                    <div>
-                                        <div>{row.name}</div>
-                                        <div>{row.email}</div>
-                                    </div>
-                                </TableCell>
-                                <TableCell sx={{ padding: '4px', minWidth: "200px" }}>{row.role}</TableCell>
-                                <TableCell sx={{ padding: '4px', minWidth: "200px" }}>{row.lastActivity}</TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        </div>
+            <div className="p-4">
+                <div className="grid grid-cols-1 md:grid-cols-10 gap-5">
+                    <div className="col-span-1 md:col-span-5 mb-5">
+                        {/* card  */}
+                        <div
+                            className="shadow-md rounded-md"
+                            style={{
+                                backgroundColor: darkMode ? theme.darkmodeBg : theme.lightmodeBg,
+                                color: darkMode ? theme.cardDarkmodeColor : theme.lightmodeClr,
+                            }}
+                        >
+                            {/* card header  */}
+                            <div className="px-4 py-3 border-b border-gray-300">
+                                <h4 className="font-semibold">Teams</h4>
+                            </div>
+
+
+                            <div className="overflow-x-auto">
+                                <table className="w-full table-auto text-left">
+                                    <thead className="bg-gray-200">
+                                        <tr>
+                                            <th className="px-4 py-2 border-b  border-gray-300">Name</th>
+                                            <th className="px-4 py-2 border-b  border-gray-300">Role</th>
+                                            <th className="px-4 py-2 border-b  border-gray-300">Activity</th>
+                                            <th className="px-4 py-2 border-b  border-gray-300"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-gray-200">
+                                        {table2.map((x: any, key: any) => {
+                                            return (
+                                                <tr key={key} >
+                                                    <td>
+                                                        <div className="flex items-center mx-5">
+                                                            <div>
+                                                                <Avatar src={x.img} style={{ marginRight: '5px' }} />
+                                                            </div>
+                                                            <div className="ms-2 ">
+                                                                <h5 >{x.name}</h5>
+                                                                <p >{x.email}</p>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td className="px-4 py-3">{x.role}</td>
+                                                    <td className="px-4 py-3">{x.lastActivity}</td>
+                                                    <MoreVertSharpIcon />
+                                                </tr>
+                                            );
+                                        })}
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div className="col-span-1 md:col-span-5 mb-5">
+                        {/* card  */}
+                        <div
+                            className="shadow-md rounded-md"
+                            style={{
+                                backgroundColor: darkMode ? theme.darkmodeBg : theme.lightmodeBg,
+                                color: darkMode ? theme.cardDarkmodeColor : theme.lightmodeClr,
+                            }}
+                        >
+                            {/* card header  */}
+                            <div className="px-4 py-3 border-b border-gray-300">
+                                <h4 className="font-semibold">Teams</h4>
+                            </div>
+
+
+                            <div className="overflow-x-auto">
+                                <table className="w-full table-auto text-left">
+                                    <thead className="bg-gray-200">
+                                        <tr>
+                                            <th className="px-4 py-2 border-b  border-gray-300">Name</th>
+                                            <th className="px-4 py-2 border-b  border-gray-300">Role</th>
+                                            <th className="px-4 py-2 border-b  border-gray-300">Activity</th>
+                                            <th className="px-4 py-2 border-b  border-gray-300"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-gray-200">
+                                        {table2.map((x: any, key: any) => {
+                                            return (
+                                                <tr key={key} >
+                                                    <td>
+                                                        <div className="flex items-center mx-5">
+                                                            <div>
+                                                                <Avatar src={x.img} style={{ marginRight: '5px' }} />
+                                                            </div>
+                                                            <div className="ms-2 ">
+                                                                <h5 >{x.name}</h5>
+                                                                <p >{x.email}</p>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td className="px-4 py-3">{x.role}</td>
+                                                    <td className="px-4 py-3">{x.lastActivity}</td>
+                                                    <MoreVertSharpIcon />
+                                                </tr>
+                                            );
+                                        })}
+                                    </tbody>
+                                </table>
+                            </div>
+
+</div>
+                        </div>
+                    </div>
+            </div>
     );
 };
 

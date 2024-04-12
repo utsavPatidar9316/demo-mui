@@ -92,21 +92,8 @@ export const table2 = [
         email: "sophia@example.com",
         role: "Project Manager",
         lastActivity: "1 November, 2022",
-    },
-    {
-        img: "https://via.placeholder.com/150",
-        name: "Sophia Wilson",
-        email: "sophia@example.com",
-        role: "Project Manager",
-        lastActivity: "1 November, 2022",
-    },
-    {
-        img: "https://via.placeholder.com/150",
-        name: "Sophia Wilson",
-        email: "sophia@example.com",
-        role: "Project Manager",
-        lastActivity: "1 November, 2022",
-    },
+    }
+   
 ];
 
 export const data3 = [
