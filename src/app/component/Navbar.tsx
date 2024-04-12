@@ -23,8 +23,10 @@ interface AppBarProps extends MuiAppBarProps {
 
 type props = {
   open: boolean;
+  isSmallScreen: boolean;
   handleDrawerOpen: () => void;
 };
+
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })<AppBarProps>(({ theme, open }) => ({
@@ -102,7 +104,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-const Navbar = ({ open, handleDrawerOpen }: props) => {
+const Navbar = ({ open, handleDrawerOpen, isSmallScreen }: props) => {
   const { darkMode, toggleDarkMode } = useDarkMode();
   return (
     <AppBar
@@ -120,27 +122,28 @@ const Navbar = ({ open, handleDrawerOpen }: props) => {
           alignItems: "center",
         }}
       >
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{ mr: 2 }}
-          >
-            <FormatAlignLeftIcon />
-          </IconButton>
-
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
-        </div>
+        {(!isSmallScreen || (isSmallScreen && !open)) && (
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{ mr: 2 }}
+            >
+              <FormatAlignLeftIcon />
+            </IconButton>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search"
+                inputProps={{ "aria-label": "search" }}
+              />
+            </Search>
+          </div>
+        )}
         <div
           style={{
             display: "flex",

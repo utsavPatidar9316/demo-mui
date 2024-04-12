@@ -30,6 +30,10 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
     }),
     marginLeft: 0,
   }),
+  // Add additional styles for smaller screens (600px or below)
+  [`@media (max-width: ${theme.breakpoints.values.sm}px)`]: {
+    marginLeft: 0,
+  },
 }));
 
 const DrawerHeader = styled("div")(({ theme }) => ({
@@ -47,6 +51,12 @@ export default function PersistentDrawerLeft() {
   const handleDrawerOpen = () => {
     setOpen(!open);
   };
+  const [isSmallScreen, setIsSmallScreen] = React.useState(() => {
+    if (typeof window !== "undefined") {
+      return window.innerWidth <= 600;
+    }
+    return false;
+  });
 
   React.useEffect(() => {
     let body = document.querySelector("body");
@@ -58,6 +68,18 @@ export default function PersistentDrawerLeft() {
     }
   }, [darkMode]);
 
+  React.useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth <= 600);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <Box
       sx={{
@@ -67,9 +89,17 @@ export default function PersistentDrawerLeft() {
       }}
     >
       <CssBaseline />
-      <Navbar open={open} handleDrawerOpen={handleDrawerOpen} />
-      <Sidebar open={open} />
-      <Main open={open} sx={{ minHeight: "100vh", color: "black" }}>
+      <Navbar
+        open={open}
+        handleDrawerOpen={handleDrawerOpen}
+        isSmallScreen={isSmallScreen}
+      />
+      <Sidebar
+        open={open}
+        handleDrawerOpen={handleDrawerOpen}
+        isSmallScreen={isSmallScreen}
+      />
+      <Main open={open} sx={{ minHeight: "100vh" }}>
         <DrawerHeader />
         <div>
           <div className="h-40" style={{ backgroundColor: "#624bff" }}>
@@ -107,14 +137,8 @@ export default function PersistentDrawerLeft() {
               <Cards />
             </div>
             <Table />
-            <div className={`flex gap-5 flex-wrap p-4`}>
-              <div className="flex-1 shadow-md rounded-md">
-                <Table1 />
-              </div>
-              <div className="flex-1 shadow-md rounded-md">
-                <Table2 />
-              </div>
-            </div>
+            <Table1 />
+            <Table2 />
           </div>
         </div>
       </Main>

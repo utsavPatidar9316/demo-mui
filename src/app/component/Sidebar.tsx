@@ -10,15 +10,19 @@ import DashboardCustomizeRoundedIcon from "@mui/icons-material/DashboardCustomiz
 import { sidebarData } from "../utils/sidebarData";
 import { useDarkMode } from "../context/Darkmode";
 import { theme } from "../utils/theme";
+import FirstPageRoundedIcon from "@mui/icons-material/FirstPageRounded";
 
 const drawerWidth = 260;
 
 type props = {
   open: boolean;
+  isSmallScreen: boolean;
+  handleDrawerOpen: () => void;
 };
 
-const Sidebar = ({ open }: props) => {
+const Sidebar = ({ open, handleDrawerOpen, isSmallScreen }: props) => {
   const { darkMode } = useDarkMode();
+
   return (
     <Drawer
       sx={{
@@ -31,16 +35,17 @@ const Sidebar = ({ open }: props) => {
           bgcolor: darkMode ? theme.darkmodeBg : theme.lightmodeBg,
         },
       }}
-      variant="persistent"
+      variant={isSmallScreen ? "temporary" : "persistent"}
       anchor="left"
       open={open}
     >
       <div
         style={{
           padding: "1rem 1.5rem 1.5rem",
-          display: "block",
+          display: "flex",
           marginRight: 0,
           filter: darkMode ? "brightness(0) invert(1)" : "",
+          gap: 80,
         }}
       >
         <img
@@ -48,6 +53,9 @@ const Sidebar = ({ open }: props) => {
           alt="Example SVG"
           style={{ height: "1.875rem" }}
         />
+        <span className="cursor-pointer">
+          {isSmallScreen && <FirstPageRoundedIcon onClick={handleDrawerOpen} />}
+        </span>
       </div>
       <List>
         {sidebarData.map((text, index) => (
