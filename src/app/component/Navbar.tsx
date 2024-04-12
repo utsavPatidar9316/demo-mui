@@ -16,7 +16,7 @@ import Avatar from "@mui/material/Avatar";
 import { useDarkMode } from "../context/Darkmode";
 import { theme } from "../utils/theme";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-const drawerWidth = 240;
+const drawerWidth = 260;
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
 }

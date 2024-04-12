@@ -12,7 +12,7 @@ import Table2 from "./component/Table2";
 import { useDarkMode } from "./context/Darkmode";
 import { theme } from "./utils/theme";
 
-const drawerWidth = 240;
+const drawerWidth = 260;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   open?: boolean;

@@ -11,7 +11,7 @@ import { sidebarData } from "../utils/sidebarData";
 import { useDarkMode } from "../context/Darkmode";
 import { theme } from "../utils/theme";
 
-const drawerWidth = 240;
+const drawerWidth = 260;
 
 type props = {
   open: boolean;
