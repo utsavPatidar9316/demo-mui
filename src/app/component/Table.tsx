@@ -75,7 +75,7 @@ const Table = () => {
     data: ProjectData;
   };
   return (
-    <div className="sm:p-[2px] md:p-4">
+    <div className="p-4">
       <div className="grid grid-cols-1 md:grid-cols-10 gap-5">
         <div className="col-span-1 md:col-span-7 mb-5">
           {/* card  */}
