@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { ReactNode } from "react";
 
 interface DarkModeContextType {
   darkMode: boolean;
@@ -26,8 +27,30 @@ export const DarkModeProvider: React.FC<DarkModeProviderProps> = ({
 }) => {
   const [darkMode, setDarkMode] = useState<boolean>(false);
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedDarkMode = localStorage.getItem("darkMode");
+      if (savedDarkMode !== null) {
+        setDarkMode(JSON.parse(savedDarkMode));
+      } else {
+        // Fallback to system preference (if applicable) or light mode
+        setDarkMode(
+          (window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches) ||
+            false
+        );
+      }
+    }
+  }, []);
+
   const toggleDarkMode = () => {
-    setDarkMode((prevDarkMode) => !prevDarkMode);
+    setDarkMode((prevDarkMode) => {
+      const newDarkMode = !prevDarkMode;
+      if (typeof window !== "undefined") {
+        localStorage.setItem("darkMode", JSON.stringify(newDarkMode));
+      }
+      return newDarkMode;
+    });
   };
 
   const contextValue: DarkModeContextType = {
