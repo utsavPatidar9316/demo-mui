@@ -23,7 +23,7 @@ const TableActivity = ({ data }: any) => {
 
 
 
-                <div className="max-h-96 h-96 overflow-y-scroll  ">
+                <div className="max-h-96 h-500 overflow-y-scroll  ">
                     <table className="w-full h-full table-auto text-left">
                         <thead className="bg-gray-200">
                             <tr className={`${darkMode ? "bg-gray-600" : "bg-gray-100"
