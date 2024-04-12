@@ -5,69 +5,21 @@ import MoreVertSharpIcon from "@mui/icons-material/MoreVertSharp";
 import Image from "next/image";
 import { useDarkMode } from "../context/Darkmode";
 import { theme } from "../utils/theme";
+import { data3 } from "../utils/data";
 const Table = () => {
   const { darkMode } = useDarkMode();
-  const data = [
-    {
-      p_name: "Dropbox Design System",
-      priority: "Medium",
-      progress: "15%",
-      chipColor: "primary",
-      src: "logo1.svg",
-      hrs: 34,
-    },
-    {
-      p_name: "Slack Team UI Design",
-      priority: "High",
-      progress: "35%",
-      chipColor: "secondary",
-      src: "logo2.svg",
-      hrs: 47,
-    },
-    {
-      p_name: "GitHub Satellite",
-      priority: "Low",
-      progress: "75%",
-      chipColor: "error",
-      src: "logo3.svg",
-      hrs: 120,
-    },
-    {
-      p_name: "3D Character Modelling",
-      priority: "Medium",
-      progress: "63%",
-      chipColor: "warning",
-      src: "logo4.svg",
-      hrs: 89,
-    },
-    {
-      p_name: "Webapp Design System",
-      priority: "Track",
-      progress: "100%",
-      chipColor: "info",
-      src: "logo5.svg",
-      hrs: 108,
-    },
-    {
-      p_name: "Github Event Design",
-      priority: "Low",
-      progress: "75%",
-      chipColor: "success",
-      src: "logo6.svg",
-      hrs: 120,
-    },
-  ];
+
   type ProjectData = {
     p_name: string;
     priority: string;
     progress: string;
     chipColor:
-      | "primary"
-      | "secondary"
-      | "error"
-      | "warning"
-      | "info"
-      | "success";
+    | "primary"
+    | "secondary"
+    | "error"
+    | "warning"
+    | "info"
+    | "success";
   };
 
   // Define the ChipProps type
@@ -95,9 +47,8 @@ const Table = () => {
               <table className="w-full table-auto text-left">
                 <thead>
                   <tr
-                    className={`${
-                      darkMode ? "bg-gray-600" : "bg-gray-100"
-                    } font-medium`}
+                    className={`${darkMode ? "bg-gray-600" : "bg-gray-100"
+                      } font-medium`}
                   >
                     <th className="px-4 py-2">Project name</th>
                     <th className="px-4 py-2">Hours</th>
@@ -107,7 +58,7 @@ const Table = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data.map((x, key) => {
+                  {data3.map((x, key) => {
                     let priorityClass = "";
                     switch (x.priority) {
                       case "Medium":
@@ -128,9 +79,8 @@ const Table = () => {
                     return (
                       <tr
                         key={key}
-                        className={`${
-                          darkMode ? "hover:bg-blue-950" : "hover:bg-gray-100"
-                        } text-sm`}
+                        className={`${darkMode ? "hover:bg-blue-950" : "hover:bg-gray-100"
+                          } text-sm`}
                       >
                         <td className="px-4 py-3">
                           <div className="flex gap-2 text-center">
@@ -161,9 +111,8 @@ const Table = () => {
                                   height: 30,
                                   position: "relative",
                                   zIndex: index + 1,
-                                  left: `${
-                                    index === 0 ? 0 : -((index - 1) * 6)
-                                  }px`, // Adjust the value as needed for desired overlap
+                                  left: `${index === 0 ? 0 : -((index - 1) * 6)
+                                    }px`, // Adjust the value as needed for desired overlap
                                 }}
                               />
                             ))}
@@ -187,11 +136,10 @@ const Table = () => {
                             <span>{x.progress}</span>
                             <div className="m-1.5 w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-300">
                               <div
-                                className={`h-1.5 rounded-full ${
-                                  x.progress === "100%"
+                                className={`h-1.5 rounded-full ${x.progress === "100%"
                                     ? "bg-green-700"
                                     : "bg-blue-600"
-                                }`}
+                                  }`}
                                 style={{ width: `${x.progress}` }}
                               ></div>
                             </div>

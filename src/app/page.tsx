@@ -13,116 +13,7 @@ import { useDarkMode } from "./context/Darkmode";
 import { theme } from "./utils/theme";
 
 const drawerWidth = 240;
-const data = [
-  {
-    name: "Design a FreshCart Home page",
-    Deadline: "Today",
-    Status: "Approved",
-  },
-  {
-    name: "Dash UI Dark Version Design",
-    Deadline: "Yesterday",
-    Status: "Pending",
-  },
-  {
-    name: "Dash UI Dark Version Design",
-    Deadline: "Yesterday",
-    Status: "Pending",
-  },
-  {
-    name: "Dash UI Dark Version Design",
-    Deadline: "Yesterday",
-    Status: "Pending",
-  },
-  {
-    name: "Dash UI Dark Version Design",
-    Deadline: "Yesterday",
-    Status: "Pending",
-  },
-  {
-    name: "Dash UI Dark Version Design",
-    Deadline: "Yesterday",
-    Status: "Pending",
-  },
-  {
-    name: "Dash UI Dark Version Design",
-    Deadline: "Yesterday",
-    Status: "Pending",
-  },
-  // Add more data as needed
-];
-const data2 = [
-  {
-    img: "https://via.placeholder.com/150",
-    name: "John Doe",
-    email: "john@example.com",
-    role: "Frontend Developer",
-    lastActivity: "3 May, 2023",
-  },
-  {
-    img: "https://via.placeholder.com/150",
-    name: "Jane Smith",
-    email: "jane@example.com",
-    role: "Backend Developer",
-    lastActivity: "5 April, 2023",
-  },
-  {
-    img: "https://via.placeholder.com/150",
-    name: "Alice Johnson",
-    email: "alice@example.com",
-    role: "UI/UX Designer",
-    lastActivity: "12 March, 2023",
-  },
-  {
-    img: "https://via.placeholder.com/150",
-    name: "Bob Williams",
-    email: "bob@example.com",
-    role: "Full Stack Developer",
-    lastActivity: "20 February, 2023",
-  },
-  {
-    img: "https://via.placeholder.com/150",
-    name: "Emily Davis",
-    email: "emily@example.com",
-    role: "Software Engineer",
-    lastActivity: "8 January, 2023",
-  },
-  {
-    img: "https://via.placeholder.com/150",
-    name: "Michael Brown",
-    email: "michael@example.com",
-    role: "Data Scientist",
-    lastActivity: "15 December, 2022",
-  },
-  {
-    img: "https://via.placeholder.com/150",
-    name: "Sophia Wilson",
-    email: "sophia@example.com",
-    role: "Project Manager",
-    lastActivity: "1 November, 2022",
-  },
-  {
-    img: "https://via.placeholder.com/150",
-    name: "Sophia Wilson",
-    email: "sophia@example.com",
-    role: "Project Manager",
-    lastActivity: "1 November, 2022",
-  },
-  {
-    img: "https://via.placeholder.com/150",
-    name: "Sophia Wilson",
-    email: "sophia@example.com",
-    role: "Project Manager",
-    lastActivity: "1 November, 2022",
-  },
-  {
-    img: "https://via.placeholder.com/150",
-    name: "Sophia Wilson",
-    email: "sophia@example.com",
-    role: "Project Manager",
-    lastActivity: "1 November, 2022",
-  },
-];
+
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   open?: boolean;
 }>(({ theme, open }) => ({
@@ -157,6 +48,16 @@ export default function PersistentDrawerLeft() {
     setOpen(!open);
   };
 
+  React.useEffect(() => {
+    let body = document.querySelector("body");
+    if (body !== null) {
+      body.style.backgroundColor = darkMode
+        ? theme.darkmodebodyBg
+        : theme.lightmodebodyBg;
+      body.style.color = darkMode ? theme.darkmodeClr : theme.lightmodeClr;
+    }
+  }, [darkMode]);
+
   return (
     <Box
       sx={{
@@ -168,7 +69,7 @@ export default function PersistentDrawerLeft() {
       <CssBaseline />
       <Navbar open={open} handleDrawerOpen={handleDrawerOpen} />
       <Sidebar open={open} />
-      <Main open={open} sx={{ height: "100vh", color: "black" }}>
+      <Main open={open} sx={{ minHeight: "100vh", color: "black" }}>
         <DrawerHeader />
         <div>
           <div className="h-40" style={{ backgroundColor: "#624bff" }}>
@@ -207,11 +108,11 @@ export default function PersistentDrawerLeft() {
             </div>
             <Table />
             <div className={`flex gap-5 flex-wrap p-4`}>
-              <div className="flex-1 bg-white shadow-md rounded-md">
-                <Table1 data={data} />
+              <div className="flex-1 shadow-md rounded-md">
+                <Table1 />
               </div>
-              <div className="flex-1 bg-white shadow-md rounded-md">
-                <Table2 data={data2} />
+              <div className="flex-1 shadow-md rounded-md">
+                <Table2 />
               </div>
             </div>
           </div>
