@@ -3,16 +3,16 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 
 const TableActivity = ({ data }: any) => {
     return (
-        <div style={{ overflow: 'auto', maxHeight: '530px' }}>
-            <TableContainer component={Paper} sx={{ padding: "10px", width: "100%" }}>
-                <div className=' p-6 '>
-                    <h1 className='font-bold '>Teams</h1>
+        <div>
+            <TableContainer >
+                <div className="px-2 m-3">
+                    <h4 className="font-semibold">Teams</h4>
                 </div>
                 <hr />
-                <div style={{ overflowX: 'scroll' }}>
-                    <Table>
+                   <div className='h-[400px]'>
+                   <Table>
                         <TableHead>
-                            <TableRow sx={{ backgroundColor: "#f1f5f9", padding: '4px', fontWeight: "bold", fontSize: "0.875rem" }}>
+                            <TableRow sx={{ backgroundColor: "#f1f5f9", padding: '4px', fontSize: "0.875rem" }}>
                                 <TableCell>Name</TableCell>
                                 <TableCell>Role</TableCell>
                                 <TableCell>Last Activity</TableCell>
@@ -34,7 +34,7 @@ const TableActivity = ({ data }: any) => {
                             ))}
                         </TableBody>
                     </Table>
-                </div>
+                   </div>
             </TableContainer>
         </div>
     );
